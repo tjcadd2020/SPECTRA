@@ -1,0 +1,14 @@
+name: spectra-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - numpy=1.26.4
+  - scipy=1.11.4
+  - pip:
+      - pandas==2.2.1
+      - scikit-learn==1.4.1.post1
+      - imbalanced-learn==0.12.2
+      - scikit-bio==0.6.2
+      - shap==0.47.0
