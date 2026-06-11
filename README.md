@@ -1,17 +1,22 @@
 # SPECTRA
 
-SPECTRA predicts sample-level microbiome-associated phenotype patterns from microbial abundance data. You can run it locally with the example files in this repository, or use the online xMICARE web server:
+SPECTRA predicts sample-level microbiome-associated phenotype patterns from metagenomic abundance data. You can run the local example files in this repository, or use the online xMICARE web server:
 
 https://www.biosino.org/iMAC/xmicare/
 
-For the web interface workflow, see [xMICARE_Tutorial.md](xMICARE_Tutorial.md). Screenshots used by that tutorial are included in `tutorial_images/`.
+For the web interface workflow, see [xMICARE_Tutorial.md](xMICARE_Tutorial.md).
+
+## Citation
+
+Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indices for Non-Invasive Detection of Chronic Diseases.** Journal, Year.
 
 ## What Is Included
 
-- Example microbial abundance, MRI, BMI-MRI, and metadata files
-- SPECTRA models for local prediction
-- A 16S workflow that starts from a microbial abundance matrix
-- A high-BMI prediction workflow
+- Main SPECTRA workflow for metagenomic abundance data
+- Main metagenomic MRI calculators and SPECTRA model
+- Example metagenomic abundance, MRI, BMI-MRI, 16S abundance, and metadata files
+- Extension application: 16S abundance workflow
+- Extension application: high-BMI SPECTRA workflow
 - Command-line scripts and shared utility functions
 
 ## Directory
@@ -23,21 +28,23 @@ For the web interface workflow, see [xMICARE_Tutorial.md](xMICARE_Tutorial.md). 
 ├── environment.yml
 ├── requirements.txt
 ├── data/
-│   ├── example_16s_abundance.csv
+│   ├── example_metagenomic_abundance.csv
 │   ├── example_mri.csv
 │   ├── example_bmi_mri.csv
+│   ├── example_16s_abundance.csv
 │   └── example_metadata.csv
 ├── models/
-│   ├── spectra_latest_tuned.pkl
-│   ├── spectra_high_bmi.pkl
-│   └── 16S/
-│       ├── mri_models_all.pkl
-│       └── spectra_16s_model.pkl
+│   ├── metagenomic/
+│   │   ├── spectra_model.pkl
+│   │   └── mri_calculators/
+│   └── extensions/
+│       ├── 16S/
+│       └── high_bmi/
 ├── scripts/
 │   ├── utils.py
 │   ├── predict_spectra_from_abundance.py
-│   ├── predict_16s.py
 │   ├── predict_spectra.py
+│   ├── predict_16s.py
 │   └── predict_bmi.py
 ├── tutorial_images/
 └── results/
@@ -46,8 +53,6 @@ For the web interface workflow, see [xMICARE_Tutorial.md](xMICARE_Tutorial.md). 
 ## Environment
 
 Recommended Python version: `3.12`.
-
-Create the environment:
 
 ```bash
 conda env create -f environment.yml
@@ -76,15 +81,15 @@ Main package versions:
 
 All input CSV files use sample IDs in the first column.
 
-### Microbial abundance matrix
+### Metagenomic abundance matrix
 
-Use this input when starting from microbiome data:
+Use this input for the main SPECTRA workflow:
 
 ```text
-data/example_16s_abundance.csv
+data/example_metagenomic_abundance.csv
 ```
 
-Rows are samples and columns are microbial taxa/features. The values should be CLR-transformed abundance values.
+Rows are samples and columns are microbial taxa/features. Values should follow the same transformed abundance format as the example file.
 
 ### MRI matrix
 
@@ -100,15 +105,21 @@ Expected MRI columns:
 ACVD, AS, BPA, CL, IBD, IGT, T2D, CI, HC, FL, ME, SC
 ```
 
-The high-BMI workflow uses the same MRI column format:
+Long-form MRI column names from existing files are also accepted by `scripts/utils.py`.
+
+### Extension inputs
+
+The 16S extension uses:
+
+```text
+data/example_16s_abundance.csv
+```
+
+The high-BMI extension uses:
 
 ```text
 data/example_bmi_mri.csv
 ```
-
-Long-form MRI column names from existing files are also accepted by `scripts/utils.py`.
-
-### Metadata
 
 The example metadata file contains only sample IDs and phenotype labels:
 
@@ -116,66 +127,66 @@ The example metadata file contains only sample IDs and phenotype labels:
 data/example_metadata.csv
 ```
 
-## Start From Microbial Abundance
-
-This is the main local SPECTRA workflow. It calculates MRI values from the abundance matrix and then runs SPECTRA prediction.
+## Main Workflow: Metagenomic Abundance -> SPECTRA
 
 ```bash
 python scripts/predict_spectra_from_abundance.py \
-  --input data/example_16s_abundance.csv \
-  --mri-model models/16S/mri_models_all.pkl \
-  --spectra-model models/16S/spectra_16s_model.pkl \
-  --output results/spectra_from_abundance_predictions.csv
+  --input data/example_metagenomic_abundance.csv \
+  --mri-model models/metagenomic/mri_calculators \
+  --spectra-model models/metagenomic/spectra_model.pkl \
+  --output results/spectra_metagenomic_predictions.csv
 ```
 
 Outputs:
 
-- `results/spectra_from_abundance_predictions_mri.csv`: intermediate MRI values
-- `results/spectra_from_abundance_predictions.csv`: predicted label plus class probabilities
-- `results/spectra_from_abundance_predictions_probability.csv`: class probabilities only
+- `results/spectra_metagenomic_predictions_mri.csv`: intermediate MRI values
+- `results/spectra_metagenomic_predictions.csv`: predicted label plus class probabilities
+- `results/spectra_metagenomic_predictions_probability.csv`: class probabilities only
 
-`scripts/predict_16s.py` provides the same abundance-to-SPECTRA workflow with a shorter output filename.
-
-## Start From Existing MRI Values
+## Optional: Existing MRI -> SPECTRA
 
 Use this only when MRI values have already been calculated.
 
 ```bash
 python scripts/predict_spectra.py \
-  --model models/spectra_latest_tuned.pkl \
+  --model models/metagenomic/spectra_model.pkl \
   --input data/example_mri.csv \
   --output results/spectra_predictions.csv
 ```
 
-Outputs:
+## Extension: 16S Abundance -> SPECTRA
 
-- `results/spectra_predictions.csv`: predicted label plus class probabilities
-- `results/spectra_predictions_probability.csv`: class probabilities only
+```bash
+python scripts/predict_16s.py \
+  --input data/example_16s_abundance.csv \
+  --mri-model models/extensions/16S/mri_models_all.pkl \
+  --spectra-model models/extensions/16S/spectra_16s_model.pkl \
+  --output results/16s_predictions.csv
+```
 
-## High-BMI Prediction
+## Extension: High-BMI Prediction
 
 ```bash
 python scripts/predict_bmi.py \
-  --model models/spectra_high_bmi.pkl \
+  --model models/extensions/high_bmi/spectra_high_bmi.pkl \
   --input data/example_bmi_mri.csv \
   --output results/bmi_predictions.csv
 ```
-
-Outputs:
-
-- `results/bmi_predictions.csv`: predicted label plus class probabilities
-- `results/bmi_predictions_probability.csv`: class probabilities only
 
 ## Use Your Own Data
 
 ```bash
 python scripts/predict_spectra_from_abundance.py \
-  --input path/to/your_16s_abundance_clr.csv \
+  --input path/to/your_metagenomic_abundance.csv \
   --output results/your_spectra_predictions.csv
 
 python scripts/predict_spectra.py \
   --input path/to/your_mri.csv \
   --output results/your_mri_based_predictions.csv
+
+python scripts/predict_16s.py \
+  --input path/to/your_16s_abundance.csv \
+  --output results/your_16s_predictions.csv
 
 python scripts/predict_bmi.py \
   --input path/to/your_bmi_mri.csv \
@@ -189,6 +200,7 @@ After installing the environment, run:
 ```bash
 python scripts/predict_spectra_from_abundance.py
 python scripts/predict_spectra.py
+python scripts/predict_16s.py
 python scripts/predict_bmi.py
 ```
 

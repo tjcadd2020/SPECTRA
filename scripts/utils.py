@@ -112,7 +112,12 @@ def load_MRIcf_and_predict_all_phenotypes(MRIcf_path, Abundance, phenotypes=None
         return MRI_res
 
     if phenotypes is None:
-        raise ValueError("phenotypes is required when MRIcf_path is a directory of per-phenotype models.")
+        phenotypes = sorted(
+            p.name.removeprefix("MRIfor").removesuffix(".pkl")
+            for p in MRIcf_path.glob("MRIfor*.pkl")
+        )
+        if not phenotypes:
+            raise ValueError("No MRIfor*.pkl files found in MRIcf_path.")
 
     MRI_res = pd.DataFrame(index=Abundance.index)
     for p in phenotypes:

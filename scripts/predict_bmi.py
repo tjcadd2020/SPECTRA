@@ -16,7 +16,7 @@ def predict(model_path, input_path, output_path):
 
 def main():
     parser = argparse.ArgumentParser(description="Run BMI-related SPECTRA prediction from MRI features.")
-    parser.add_argument("--model", default="models/spectra_high_bmi.pkl")
+    parser.add_argument("--model", default="models/extensions/high_bmi/spectra_high_bmi.pkl")
     parser.add_argument("--input", default="data/example_bmi_mri.csv")
     parser.add_argument("--output", default="results/bmi_predictions.csv")
     args = parser.parse_args()

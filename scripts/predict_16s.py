@@ -18,8 +18,8 @@ def predict(abundance_path, mri_model_path, spectra_model_path, output_path):
 def main():
     parser = argparse.ArgumentParser(description="Run 16S abundance to SPECTRA phenotype prediction.")
     parser.add_argument("--input", default="data/example_16s_abundance.csv")
-    parser.add_argument("--mri-model", default="models/16S/mri_models_all.pkl")
-    parser.add_argument("--spectra-model", default="models/16S/spectra_16s_model.pkl")
+    parser.add_argument("--mri-model", default="models/extensions/16S/mri_models_all.pkl")
+    parser.add_argument("--spectra-model", default="models/extensions/16S/spectra_16s_model.pkl")
     parser.add_argument("--output", default="results/16s_predictions.csv")
     args = parser.parse_args()
     predict(args.input, args.mri_model, args.spectra_model, args.output)

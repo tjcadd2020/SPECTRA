@@ -16,7 +16,7 @@ def predict(model_path, input_path, output_path):
 
 def main():
     parser = argparse.ArgumentParser(description="Run SPECTRA phenotype prediction from MRI features.")
-    parser.add_argument("--model", default="models/spectra_latest_tuned.pkl")
+    parser.add_argument("--model", default="models/metagenomic/spectra_model.pkl")
     parser.add_argument("--input", default="data/example_mri.csv")
     parser.add_argument("--output", default="results/spectra_predictions.csv")
     args = parser.parse_args()

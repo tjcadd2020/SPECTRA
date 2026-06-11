@@ -16,11 +16,11 @@ def predict(abundance_path, mri_model_path, spectra_model_path, output_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run SPECTRA prediction from a microbial abundance matrix.")
-    parser.add_argument("--input", default="data/example_16s_abundance.csv")
-    parser.add_argument("--mri-model", default="models/16S/mri_models_all.pkl")
-    parser.add_argument("--spectra-model", default="models/16S/spectra_16s_model.pkl")
-    parser.add_argument("--output", default="results/spectra_from_abundance_predictions.csv")
+    parser = argparse.ArgumentParser(description="Run SPECTRA prediction from a metagenomic abundance matrix.")
+    parser.add_argument("--input", default="data/example_metagenomic_abundance.csv")
+    parser.add_argument("--mri-model", default="models/metagenomic/mri_calculators")
+    parser.add_argument("--spectra-model", default="models/metagenomic/spectra_model.pkl")
+    parser.add_argument("--output", default="results/spectra_metagenomic_predictions.csv")
     args = parser.parse_args()
     predict(args.input, args.mri_model, args.spectra_model, args.output)
 
