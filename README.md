@@ -53,7 +53,7 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 
 ## Environment
 
-Recommended Python version: `3.10`.
+Recommended Python version: `3.12`.
 
 ```bash
 conda env create -f environment.yml
