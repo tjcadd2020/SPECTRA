@@ -53,7 +53,7 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 
 ## Environment
 
-Recommended Python version: `3.10`, matching the xMICARE website runtime.
+Recommended Python version: `3.10`.
 
 ```bash
 conda env create -f environment.yml
@@ -90,7 +90,7 @@ Use this input for the main SPECTRA workflow:
 data/example_metagenomic_abundance.csv
 ```
 
-Rows are samples and columns are microbial taxa/features. Values should follow the same transformed abundance format as the example file.
+Rows are samples and columns are microbial taxa/features. Values should follow the clr transformed abundance format as the example file.
 
 ### MRI matrix
 
@@ -105,8 +105,6 @@ Expected MRI columns:
 ```text
 ACVD, AS, BPA, CL, IBD, IGT, T2D, CI, HC, FL, ME, SC
 ```
-
-Long-form MRI column names from existing files are also accepted by `scripts/utils.py`.
 
 ### Extension inputs
 
@@ -145,11 +143,6 @@ Outputs:
 - `results/spectra_metagenomic_predictions.csv`: predicted label plus class probabilities
 - `results/spectra_metagenomic_predictions_probability.csv`: class probabilities only
 
-The corresponding utility function is:
-
-```python
-from scripts.utils import predict_spectra_from_abundance
-```
 
 ## Optional: Metagenomic Abundance -> MRI
 
