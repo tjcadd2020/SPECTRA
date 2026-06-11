@@ -194,12 +194,23 @@ def predict_from_abundance_to_phenotype(Abundance, MRI_model_path, SPECTRA_model
         MRIcf_path=MRI_model_path,
         Abundance=Abundance,
     )
-    MRI_for_spectra = format_mri_for_16s_spectra(MRI)
     prediction, probability = load_and_predict_SPECTRA_for_phenotype(
         model_path=SPECTRA_model_path,
-        MRIfile=MRI_for_spectra,
+        MRIfile=MRI,
     )
     return {"MRI": MRI, "probability": probability, "prediction": prediction}
+
+
+def predict_spectra_from_abundance(Abundance, MRI_model_path, SPECTRA_model_path):
+    MRI = load_MRIcf_and_predict_all_phenotypes(
+        MRIcf_path=MRI_model_path,
+        Abundance=Abundance,
+    )
+    prediction, probability = load_and_predict_SPECTRA_for_phenotype(
+        model_path=SPECTRA_model_path,
+        MRIfile=MRI,
+    )
+    return prediction, probability
 
 
 def save_prediction_outputs(output_path, prediction, probability, MRI=None):

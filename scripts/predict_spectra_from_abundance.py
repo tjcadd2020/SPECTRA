@@ -2,17 +2,17 @@
 import argparse
 import pandas as pd
 
-from utils import predict_from_abundance_to_phenotype, save_prediction_outputs
+from utils import predict_spectra_from_abundance, save_prediction_outputs
 
 
 def predict(abundance_path, mri_model_path, spectra_model_path, output_path):
     abundance = pd.read_csv(abundance_path, index_col=0)
-    res = predict_from_abundance_to_phenotype(
+    prediction, probability = predict_spectra_from_abundance(
         Abundance=abundance,
         MRI_model_path=mri_model_path,
         SPECTRA_model_path=spectra_model_path,
     )
-    save_prediction_outputs(output_path, res["prediction"], res["probability"], MRI=res["MRI"])
+    save_prediction_outputs(output_path, prediction, probability)
 
 
 def main():

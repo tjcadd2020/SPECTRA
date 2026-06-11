@@ -43,6 +43,7 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 ├── scripts/
 │   ├── utils.py
 │   ├── predict_spectra_from_abundance.py
+│   ├── predict_mri_from_abundance.py
 │   ├── predict_spectra.py
 │   ├── predict_16s.py
 │   └── predict_bmi.py
@@ -52,7 +53,7 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 
 ## Environment
 
-Recommended Python version: `3.12`.
+Recommended Python version: `3.10`, matching the xMICARE website runtime.
 
 ```bash
 conda env create -f environment.yml
@@ -127,7 +128,9 @@ The example metadata file contains only sample IDs and phenotype labels:
 data/example_metadata.csv
 ```
 
-## Main Workflow: Metagenomic Abundance -> SPECTRA
+## Main Workflow: Metagenomic Abundance -> SPECTRA Prediction
+
+This one-step command starts from a metagenomic abundance matrix and directly writes SPECTRA prediction outputs.
 
 ```bash
 python scripts/predict_spectra_from_abundance.py \
@@ -139,13 +142,29 @@ python scripts/predict_spectra_from_abundance.py \
 
 Outputs:
 
-- `results/spectra_metagenomic_predictions_mri.csv`: intermediate MRI values
 - `results/spectra_metagenomic_predictions.csv`: predicted label plus class probabilities
 - `results/spectra_metagenomic_predictions_probability.csv`: class probabilities only
 
-## Optional: Existing MRI -> SPECTRA
+The corresponding utility function is:
 
-Use this only when MRI values have already been calculated.
+```python
+from scripts.utils import predict_spectra_from_abundance
+```
+
+## Optional: Metagenomic Abundance -> MRI
+
+Use this command only if you want to inspect or reuse the intermediate MRI values.
+
+```bash
+python scripts/predict_mri_from_abundance.py \
+  --input data/example_metagenomic_abundance.csv \
+  --mri-model models/metagenomic/mri_calculators \
+  --output results/metagenomic_mri.csv
+```
+
+## Optional: MRI -> SPECTRA Prediction
+
+Use this command only when MRI values have already been calculated.
 
 ```bash
 python scripts/predict_spectra.py \
@@ -180,6 +199,10 @@ python scripts/predict_spectra_from_abundance.py \
   --input path/to/your_metagenomic_abundance.csv \
   --output results/your_spectra_predictions.csv
 
+python scripts/predict_mri_from_abundance.py \
+  --input path/to/your_metagenomic_abundance.csv \
+  --output results/your_mri.csv
+
 python scripts/predict_spectra.py \
   --input path/to/your_mri.csv \
   --output results/your_mri_based_predictions.csv
@@ -199,6 +222,7 @@ After installing the environment, run:
 
 ```bash
 python scripts/predict_spectra_from_abundance.py
+python scripts/predict_mri_from_abundance.py
 python scripts/predict_spectra.py
 python scripts/predict_16s.py
 python scripts/predict_bmi.py
