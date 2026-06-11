@@ -122,7 +122,7 @@ The high-BMI extension uses:
 data/example_bmi_mri.csv
 ```
 
-The example metadata file contains only sample IDs and phenotype labels:
+The example metadata file contains sample IDs and phenotype labels:
 
 ```text
 data/example_metadata.csv
