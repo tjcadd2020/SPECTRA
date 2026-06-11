@@ -100,6 +100,8 @@ If MRI values have already been calculated, SPECTRA can also start from an MRI t
 data/example_mri.csv
 ```
 
+This example MRI file is generated from `data/example_metagenomic_abundance.csv` with `scripts/predict_mri_from_abundance.py`, so the one-step and two-step example workflows produce the same SPECTRA probabilities.
+
 Expected MRI columns:
 
 ```text

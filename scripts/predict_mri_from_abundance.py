@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from utils import load_MRIcf_and_predict_all_phenotypes
+from utils import load_MRIcf_and_predict_all_phenotypes, shorten_probability_labels
 
 
 def predict(abundance_path, mri_model_path, output_path):
@@ -13,6 +13,7 @@ def predict(abundance_path, mri_model_path, output_path):
         MRIcf_path=mri_model_path,
         Abundance=abundance,
     )
+    mri = shorten_probability_labels(mri)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     mri.to_csv(output_path)
