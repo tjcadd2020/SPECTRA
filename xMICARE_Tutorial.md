@@ -14,6 +14,162 @@ the example dataset once before uploading your own file.
 - **More**: extension modules for 16S data and high-BMI populations.
 - **Contact**: links, references, and example-data downloads.
 
+## Before running an analysis
+
+1. Upload relative abundance tables with samples as rows and taxa as columns.
+   The models apply the required preprocessing internally.
+2. MGS/WGS MSig matching uses MetaPhlAn3 names, and 16S matching uses species names
+   consistent with MPA annotations. If source labels use another convention, use the
+   name-conversion Skills provided with xMICARE and review the mapping table before
+   prediction.
+3. The app reports incomplete MSig coverage in your original input and any MSig
+   naming differences as reminders. Calculation can continue. Reference features
+   added internally are not counted as features supplied by your input.
+4. The main **Screening** workflow is intended for the normal-BMI range
+   **18.5 ≤ BMI < 25**. For samples with **BMI ≥ 25**, use the dedicated
+   **More → High-BMI Population** model. Samples with BMI below 18.5 are outside the
+   intended BMI range of the currently provided models.
+
+The next section describes how to prepare relative abundance from sequencing
+reads. If you already have a relative-abundance table, review species-name
+compatibility and continue to the Skills and case-study examples.
+
+---
+
+## Preparing relative abundance from raw reads
+
+Complete sequencing-read processing before uploading a relative-abundance table.
+The models apply their own preprocessing internally.
+
+### WGS: curatedMetagenomicData v3 taxonomic profiling
+
+Please process WGS metagenomic sequencing data as follows. For initial read quality
+control, we recommend assessing read quality using FastQC and removing sequencing
+adapters, low-quality bases, and host-derived reads using
+[KneadData](https://github.com/biobakery/kneaddata), which combines Trimmomatic and
+Bowtie2. Then follow the taxonomic-profiling workflow used by curatedMetagenomicData
+v3: run MetaPhlAn v3.0 with the `mpa_v30_CHOCOPhlAn_201901` database and default
+profiling parameters. For paired-end data, supply both read files to MetaPhlAn.
+Extract species-level relative abundances for each sample/run, retain the full
+MetaPhlAn3 taxonomic lineage names and all profiled species, combine the profiles
+into a sample-by-species matrix, and normalize each sample to sum to 1. See the
+[curatedMetagenomicData pipeline documentation](https://waldronlab.io/curatedMetagenomicData/articles/our-pipeline.html)
+and [MetaPhlAn3 documentation](https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-3.0)
+for details.
+
+The initial quality-control steps above are recommendations for new raw reads.
+curatedMetagenomicData v3 relied on study-specific preprocessing, as explained in
+the [maintainer's processing and database notes](https://support.bioconductor.org/p/9154295/).
+
+### 16S: GMrepo processing
+
+Please process the 16S sequencing data according to the
+[GMrepo pipeline](https://doi.org/10.1093/nar/gkz764) (Nucleic Acids Research, 2020),
+as follows: assess read quality using FastQC v0.11.8, remove sequencing vector
+sequences and low-quality bases using Trimmomatic (alternatively, use Cutadapt for
+primer removal, e.g., for Illumina data), and discard reads shorter than two-thirds
+of their original length. Merge paired-end reads using Casper and process
+single-end reads directly. Convert FASTQ to FASTA using Seqtk if needed. Assign
+taxonomy using MAPseq v1.2, retaining reads with a genus-level combined score >0.4.
+Calculate species-level relative abundances for each sample/run and normalize the
+abundances to sum to 1.
+
+### If you used another processing workflow
+
+Check species-name compatibility before prediction, especially if you used a
+different profiling tool or taxonomy database. WGS names should follow MetaPhlAn3;
+16S names should match the MPA annotation labels used by the supplied 16S reference.
+If names differ, you can use `spectra-wgs-name-converter` for WGS or
+`spectra-16s-name-converter` for 16S, then review the mapped and unmatched names.
+Keep all source species in the relative-abundance table. Name conversion
+standardizes labels; abundance estimates can still differ between processing
+workflows.
+
+---
+
+# Skills & Reproducible Case Study
+
+A **Skill** is a reusable set of instructions and reference files that helps
+ChatGPT or Codex perform a specialized task consistently. xMICARE includes two
+repository-scoped Skills for converting species names before analysis. They change
+names only; they do **not** change abundance values, run CLR, calculate MRIs, or
+make SPECTRA predictions.
+
+| Your data | Use this Skill | Output |
+|---|---|---|
+| WGS / shotgun metagenomics | `spectra-wgs-name-converter` | MetaPhlAn3 feature-name mapping |
+| 16S amplicon data | `spectra-16s-name-converter` | MPA-consistent 16S feature-name mapping |
+
+In the xMICARE website repository, the Skills are stored in `.agents/skills/`.
+The copies bundled with this repository are in [`skills/`](skills/). When Codex is
+opened from the xMICARE website repository, the Skills can be selected with `/skills`
+or mentioned by typing `$` followed by the Skill name. If a newly added Skill does not appear, restart Codex. See the
+[official Skill documentation](https://developers.openai.com/codex/skills) for the
+current discovery and invocation behavior.
+
+**Do not choose a Skill by looking at the spelling of the taxon names.** Choose it
+from the sequencing method that produced the table: WGS or 16S.
+
+- [WGS name-converter Skill files](skills/spectra-wgs-name-converter/)
+
+- [16S name-converter Skill files](skills/spectra-16s-name-converter/)
+
+## Practice the WGS Skill on the NingL 2022 CRC cohort
+
+This case uses the independent PRJNA731589 WGS colorectal-cancer cohort. Copy the
+following prompt into Codex with the WGS Skill available and this repository open:
+
+```text
+Use $spectra-wgs-name-converter on
+case_studies/NingL_2022_CRC/2. Microbial features.csv and save the mapping to
+/tmp/ningl_mapping.csv. Compare it with
+case_studies/NingL_2022_CRC/3. Taxon name mapping.csv and report
+the mapped and unmatched counts. Do not change abundance values.
+```
+
+The two columns map original taxon labels to feature names. In this case, 1,685
+source species produce 1,270 SPECTRA-compatible feature labels while 415 unmatched
+source labels are retained.
+
+## Fastest reproduction: no coding required
+
+1. Open **Screening → All in One**.
+2. Select **Use NingL 2022 CRC case study**.
+3. Confirm the preview reports **116 samples × 1,685 features**.
+4. Click **Run All (MSigs → MRIs → SPECTRA)** and wait for completion.
+5. Download the MRI and SPECTRA prediction tables.
+6. Compare them with the bundled reference files below. The MRI download uses labels
+   such as `MRI(BPA)` while the reference table uses the equivalent training name
+   `BloodPressureAbnormalities`.
+
+Expected checkpoints are **52 CL + 64 HC samples**, **12 phenotype probabilities**,
+and **CL AUC 0.7115**. Small floating-point differences in the last decimal place
+are acceptable. These are model outputs for research reproduction, not a clinical
+diagnosis.
+
+- [Download relative abundance with original taxon names](case_studies/NingL_2022_CRC/1.%20Raw%20relative%20abundance.csv)
+
+- [Download name-converted relative abundance](case_studies/NingL_2022_CRC/4.%20Name-converted%20relative%20abundance.csv)
+
+- [Download case metadata](case_studies/NingL_2022_CRC/0.%20metadata.csv)
+
+- [Download taxon name mapping](case_studies/NingL_2022_CRC/3.%20Taxon%20name%20mapping.csv)
+
+- [Download reference MRIs](case_studies/NingL_2022_CRC/5.%20MRI%20scores.csv)
+
+- [Download reference probabilities](case_studies/NingL_2022_CRC/6.%20Probability.csv)
+
+- [Complete NingL 2022 CRC case study](case_studies/NingL_2022_CRC/)
+
+For reproduction from the published source tables in this repository, follow
+[the case-study README](case_studies/NingL_2022_CRC/README.md). It describes
+cohort selection and Skill-based name conversion. Run
+[SPECTRA_process.ipynb](case_studies/NingL_2022_CRC/SPECTRA_process.ipynb)
+to execute the models, compare the outputs with the reference files, and
+evaluate the results.
+
+---
+
 # All in One
 
 The **All in One** page runs the complete workflow from a microbial abundance table
@@ -45,8 +201,8 @@ SPECTRA prediction. Wait until the pipeline finishes before scrolling to the rep
 and SHAP sections.
 
 If the run fails, first check whether the uploaded table follows the example CSV
-format. Most input-related failures come from feature names, sample IDs, duplicated
-columns, or non-numeric values.
+format and has valid, unique sample IDs and numeric relative abundances. MSig naming
+differences and incomplete coverage produce reminders and allow calculation to continue.
 
 ![Run button and pipeline status area.](tutorial_images/quickstart_03_run_all.png)
 
@@ -92,6 +248,8 @@ downstream analysis outside the web app.
 
 ![Result download area.](tutorial_images/quickstart_06_download.png)
 
+---
+
 # MSigs
 
 The **MSigs** page calculates phenotype-specific microbial signature presence from
@@ -127,6 +285,8 @@ file should be kept together with the abundance table used to generate it, becau
 the next module expects these inputs to correspond to the same feature space.
 
 ![MSig result download.](tutorial_images/msigs_04_download.png)
+
+---
 
 # MRIs
 
@@ -173,6 +333,8 @@ and downstream plots can still refer to the correct samples.
 
 ![MRI result download.](tutorial_images/mri_06_download.png)
 
+---
+
 # SPECTRA
 
 The **SPECTRA** page starts from an MRI table and generates phenotype probability
@@ -215,17 +377,19 @@ probability ranking.
 
 ![Additional SPECTRA possibilities.](tutorial_images/spectra_06_topN.png)
 
+---
+
 # Input And Result Notes
 
 ## Input format
 
 For the main Screening workflow, use a CSV file with samples as rows and microbial
-taxa/features as columns. The first column should identify sample IDs, and abundance
-values should be numeric. MetaPhlAn-style taxonomic names are recommended for the
-main workflow.
+taxa/features as columns. The first column should identify sample IDs. Values must
+be non-negative relative abundances, expressed as proportions or percentages, and
+MSig matching uses MetaPhlAn3 names. Models apply preprocessing internally.
 
 For the 16S extension, use the provided 16S example file as a template for the
-expected abundance-table structure.
+expected relative-abundance structure and species names consistent with MPA annotations.
 
 For the high-BMI extension, use a non-negative relative abundance table with samples
 as rows and microbial taxa as columns.
@@ -238,6 +402,8 @@ Taxa-level SHAP summarizes taxa contributions through MRI features for the selec
 explanation target. Downloaded CSV files preserve the numerical outputs for later
 review or external analysis.
 
+---
+
 # More
 
 The **More** page provides extension modules for additional application scenarios.
@@ -249,20 +415,23 @@ The current More modules are **16S Data** and **High-BMI Population**. For both
 modules, the built-in example dataset is the recommended first run because it shows
 the expected input layout and result structure.
 
+---
+
 # 16S Data
 
 The **16S Data** page is available under **More**. Use this page when the input data
-are 16S-derived microbial abundance features rather than the main metagenomic
+are 16S-derived microbial relative abundance features rather than the main metagenomic
 feature format used in the Screening workflow.
 
 The safest way to prepare a compatible file is to start from the provided 16S
 example dataset and match its structure. Before running the analysis, check that
-samples are arranged in rows and microbial features are arranged in columns.
+samples are arranged in rows and microbial features are arranged in columns, with
+species names consistent with MPA annotations. The model applies preprocessing internally.
 
 Recommended workflow:
 
 1. Open **More → 16S Data**.
-2. Choose the example dataset or upload a 16S abundance CSV file.
+2. Choose the example dataset or upload a 16S relative abundance CSV file.
 3. Run the 16S model.
 4. Review the computed MRI values and SPECTRA probability matrix.
 5. Select a sample and generate the report.
@@ -270,6 +439,8 @@ Recommended workflow:
 
 The report and explanation layout is intentionally similar to All in One, so users
 can interpret top possibilities, MRI SHAP, and taxa-level SHAP in the same way.
+
+---
 
 # High-BMI Population
 

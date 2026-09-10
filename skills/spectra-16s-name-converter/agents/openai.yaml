@@ -1,0 +1,4 @@
+interface:
+  display_name: "SPECTRA 16S name converter"
+  short_description: "Convert 16S species labels to SPECTRA MSig names"
+  default_prompt: "Use $spectra-16s-name-converter to convert this 16S taxon list and save a two-column mapping CSV."

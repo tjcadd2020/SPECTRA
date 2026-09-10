@@ -1,8 +1,26 @@
 import pickle
+import warnings
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+try:
+    from .composition import prepare_abundance as _prepare_abundance, msig_input_diagnostics
+except ImportError:
+    from composition import prepare_abundance as _prepare_abundance, msig_input_diagnostics
+
+
+def prepare_abundance(abundance, data_type="mgs"):
+    """Transform relative abundance using the reference appropriate to the assay."""
+    if data_type == "16s":
+        return _prepare_abundance(abundance)
+    if data_type != "mgs":
+        raise ValueError("data_type must be 'mgs' or '16s'.")
+    reference_path = (Path(__file__).resolve().parents[1] / "skills" /
+                      "spectra-wgs-name-converter/assets/spectra_canonical_1554.txt")
+    reference = reference_path.read_text().splitlines()
+    return _prepare_abundance(abundance, reference)
 
 
 PHENOTYPE_NAME_MAP = {
@@ -85,7 +103,8 @@ def predict_MRI_for_phenotype(MRIcf, Abundance, phenotype):
 
 
 def load_MRIcf_and_predict_all_phenotypes(MRIcf_path, Abundance, phenotypes=None):
-    Abundance = clean_matrix(Abundance)
+    """Calculate MRI values from relative abundance with built-in preprocessing."""
+    input_features = list(Abundance.columns)
     MRIcf_path = Path(MRIcf_path)
 
     if MRIcf_path.is_file():
@@ -94,11 +113,16 @@ def load_MRIcf_and_predict_all_phenotypes(MRIcf_path, Abundance, phenotypes=None
         bundle = None
 
     if isinstance(bundle, dict) and {"models", "feature_map"}.issubset(bundle):
+        Abundance = prepare_abundance(Abundance, data_type="16s")
         MRI_models = bundle["models"]
         MRI_feature_map = bundle["feature_map"]
         if phenotypes is None:
             phenotypes = list(MRI_models.keys())
 
+        msig_features = [feature for p in phenotypes for feature in MRI_feature_map[p]]
+        diagnostics = msig_input_diagnostics(input_features, msig_features, check_names=False)
+        for message in diagnostics["messages"]:
+            warnings.warn(message, UserWarning, stacklevel=2)
         MRI_res = pd.DataFrame(index=Abundance.index)
         for p in phenotypes:
             MRIcf = MRI_models[p]
@@ -111,6 +135,7 @@ def load_MRIcf_and_predict_all_phenotypes(MRIcf_path, Abundance, phenotypes=None
             )
         return MRI_res
 
+    Abundance = prepare_abundance(Abundance, data_type="mgs")
     if phenotypes is None:
         phenotypes = sorted(
             p.name.removeprefix("MRIfor").removesuffix(".pkl")
@@ -120,15 +145,20 @@ def load_MRIcf_and_predict_all_phenotypes(MRIcf_path, Abundance, phenotypes=None
             raise ValueError("No MRIfor*.pkl files found in MRIcf_path.")
 
     MRI_res = pd.DataFrame(index=Abundance.index)
+    msig_features = []
     for p in phenotypes:
         MRIcf = load_pickle(MRIcf_path / f"MRIfor{p}.pkl")
         features = list(MRIcf.feature_names_in_)
+        msig_features.extend(features)
         X_sub = Abundance.reindex(columns=features, fill_value=0.0)
         X_sub = clean_matrix(X_sub)
         MRI_res = pd.concat(
             [MRI_res, predict_MRI_for_phenotype(MRIcf, X_sub, p)],
             axis=1,
         )
+    diagnostics = msig_input_diagnostics(input_features, msig_features)
+    for message in diagnostics["messages"]:
+        warnings.warn(message, UserWarning, stacklevel=2)
     return MRI_res
 
 

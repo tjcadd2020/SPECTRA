@@ -1,0 +1,164 @@
+sample_id,source_label,true_label,env_material,geo_loc_name_country,Host_age,host_sex,Library Name,Platform,gastrointest_disord,Host_disease,host_tissue_sampled
+SRR8417365,Healthy subject,control,intestinal mucosa,Italy,24,female,72,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417366,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,52,female,84,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417368,Healthy subject,control,stool,Italy,55,female,233,LS454,Absence,Healthy subject,Stool
+SRR8417369,Healthy subject,control,intestinal mucosa,Italy,41,male,232,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417371,Healthy subject,control,stool,Italy,41,male,231,LS454,Absence,Healthy subject,Stool
+SRR8417372,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,52,male,20,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417373,Irritable Bowel Syndrome,IBS,stool,Italy,52,male,19,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417374,Healthy subject,control,intestinal mucosa,Italy,40,male,230,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417375,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,28,male,14,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417376,Irritable Bowel Syndrome,IBS,stool,Italy,28,male,13,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417377,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,35,female,12,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417378,Irritable Bowel Syndrome,IBS,stool,Italy,35,female,11,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417379,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,46,female,18,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417380,Irritable Bowel Syndrome,IBS,stool,Italy,46,female,17,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417381,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,51,male,16,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417382,Irritable Bowel Syndrome,IBS,stool,Italy,51,male,15,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417383,Healthy subject,control,intestinal mucosa,Italy,40,male,228,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417384,Healthy subject,control,stool,Italy,40,male,227,LS454,Absence,Healthy subject,Stool
+SRR8417385,Healthy subject,control,intestinal mucosa,Italy,72,male,250,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417386,Healthy subject,control,stool,Italy,44,male,247,LS454,Absence,Healthy subject,Stool
+SRR8417387,Healthy subject,control,intestinal mucosa,Italy,51,female,246,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417388,Healthy subject,control,intestinal mucosa,Italy,50,male,226,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417389,Healthy subject,control,intestinal mucosa,Italy,44,male,248,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417394,Healthy subject,control,stool,Italy,65,female,101,LS454,Absence,Healthy subject,Stool
+SRR8417395,Healthy subject,control,intestinal mucosa,Italy,69,male,100,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417396,Healthy subject,control,stool,Italy,70,male,99,LS454,Absence,Healthy subject,Stool
+SRR8417398,Healthy subject,control,stool,Italy,50,female,103,LS454,Absence,Healthy subject,Stool
+SRR8417399,Healthy subject,control,intestinal mucosa,Italy,65,female,102,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417400,Healthy subject,control,intestinal mucosa,Italy,47,female,244,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417401,Healthy subject,control,stool,Italy,51,female,245,LS454,Absence,Healthy subject,Stool
+SRR8417404,Healthy subject,control,intestinal mucosa,Italy,61,male,236,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417405,Healthy subject,control,stool,Italy,64,male,237,LS454,Absence,Healthy subject,Stool
+SRR8417406,Healthy subject,control,intestinal mucosa,Italy,64,male,238,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417407,Healthy subject,control,stool,Italy,54,female,239,LS454,Absence,Healthy subject,Stool
+SRR8417408,Healthy subject,control,intestinal mucosa,Italy,54,female,240,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417409,Healthy subject,control,stool,Italy,57,female,241,LS454,Absence,Healthy subject,Stool
+SRR8417410,Healthy subject,control,intestinal mucosa,Italy,57,female,242,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417411,Healthy subject,control,stool,Italy,47,female,243,LS454,Absence,Healthy subject,Stool
+SRR8417412,Healthy subject,control,intestinal mucosa,Italy,49,male,143,LS454,Absence,Healthy subject,Stool
+SRR8417413,Healthy subject,control,stool,Italy,50,male,142,LS454,Absence,Healthy subject,Stool
+SRR8417414,Healthy subject,control,intestinal mucosa,Italy,60,male,141,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417415,Healthy subject,control,intestinal mucosa,Italy,58,male,140,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417416,Healthy subject,control,intestinal mucosa,Italy,65,female,139,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417417,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,50,female,138,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417418,Irritable Bowel Syndrome,IBS,stool,Italy,50,female,137,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417419,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,25,female,136,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417420,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,61,female,135,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417421,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,62,female,134,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417422,Healthy subject,control,stool,Italy,40,male,229,LS454,Absence,Healthy subject,Stool
+SRR8417423,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,52,female,32,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417424,Irritable Bowel Syndrome,IBS,stool,Italy,52,female,31,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417441,Irritable Bowel Syndrome,IBS,stool,Italy,59,female,9,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417444,Healthy subject,control,stool,Italy,61,male,235,LS454,Absence,Healthy subject,Stool
+SRR8417445,Healthy subject,control,intestinal mucosa,Italy,55,female,234,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417446,Healthy subject,control,intestinal mucosa,Italy,62,male,112,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417447,Healthy subject,control,stool,Italy,46,male,113,LS454,Absence,Healthy subject,Stool
+SRR8417449,Healthy subject,control,intestinal mucosa,Italy,54,female,106,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417450,Healthy subject,control,stool,Italy,50,female,107,LS454,Absence,Healthy subject,Stool
+SRR8417451,Healthy subject,control,intestinal mucosa,Italy,50,female,104,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417452,Healthy subject,control,stool,Italy,54,female,105,LS454,Absence,Healthy subject,Stool
+SRR8417453,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,41,female,2,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417454,Irritable Bowel Syndrome,IBS,stool,Italy,41,female,1,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417455,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,57,female,4,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417456,Irritable Bowel Syndrome,IBS,stool,Italy,56,female,3,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417457,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,48,female,172,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417458,Healthy subject,control,stool,Italy,62,male,173,LS454,Absence,Healthy subject,Stool
+SRR8417459,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,49,female,8,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417460,Irritable Bowel Syndrome,IBS,stool,Italy,48,female,7,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417461,Irritable Bowel Syndrome,IBS,stool,Italy,52,male,168,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417462,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,52,male,169,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417463,Healthy subject,control,intestinal mucosa,Italy,59,male,170,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417464,Irritable Bowel Syndrome,IBS,stool,Italy,48,female,171,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417465,Healthy subject,control,stool,Italy,29,male,164,LS454,Absence,Healthy subject,Stool
+SRR8417466,Healthy subject,control,intestinal mucosa,Italy,29,male,165,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417467,Healthy subject,control,stool,Italy,57,male,166,LS454,Absence,Healthy subject,Stool
+SRR8417468,Healthy subject,control,intestinal mucosa,Italy,56,male,167,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417469,Irritable Bowel Syndrome,IBS,stool,Italy,58,female,23,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417470,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,58,female,24,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417471,Irritable Bowel Syndrome,IBS,stool,Italy,49,male,21,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417472,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,49,male,22,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417473,Irritable Bowel Syndrome,IBS,stool,Italy,54,female,27,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417474,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,54,female,28,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417475,Irritable Bowel Syndrome,IBS,stool,Italy,55,male,25,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417476,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,55,male,26,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417478,Irritable Bowel Syndrome,IBS,stool,Italy,42,male,29,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417479,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,42,male,30,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417480,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,36,female,6,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417493,Healthy subject,control,intestinal mucosa,Italy,54,male,224,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417494,Healthy subject,control,stool,Italy,50,male,225,LS454,Absence,Healthy subject,Stool
+SRR8417495,Irritable Bowel Syndrome,IBS,stool,Italy,36,female,5,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417496,Irritable Bowel Syndrome,IBS,stool,Italy,54,female,123,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417497,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,52,female,122,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417498,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,58,female,10,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417499,Healthy subject,control,stool,Italy,54,female,115,LS454,Absence,Healthy subject,Stool
+SRR8417500,Healthy subject,control,intestinal mucosa,Italy,46,male,114,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417501,Healthy subject,control,stool,Italy,54,male,117,LS454,Absence,Healthy subject,Stool
+SRR8417502,Healthy subject,control,intestinal mucosa,Italy,54,female,116,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417503,Irritable Bowel Syndrome,IBS,stool,Italy,64,male,119,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417504,Healthy subject,control,intestinal mucosa,Italy,54,male,118,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417505,Irritable Bowel Syndrome,IBS,stool,Italy,52,female,121,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417506,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,64,male,120,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417510,Healthy subject,control,stool,Italy,58,male,177,LS454,Absence,Healthy subject,Stool
+SRR8417511,Healthy subject,control,intestinal mucosa,Italy,53,female,176,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417512,Healthy subject,control,stool,Italy,53,female,175,LS454,Absence,Healthy subject,Stool
+SRR8417513,Healthy subject,control,intestinal mucosa,Italy,62,male,174,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417515,Healthy subject,control,intestinal mucosa,Italy,53,female,180,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417516,Healthy subject,control,stool,Italy,53,female,179,LS454,Absence,Healthy subject,Stool
+SRR8417517,Healthy subject,control,intestinal mucosa,Italy,58,male,178,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417529,Healthy subject,control,stool,Italy,53,female,215,LS454,Absence,Healthy subject,Stool
+SRR8417533,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,41,female,150,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417534,Healthy subject,control,stool,Italy,42,male,151,LS454,Absence,Healthy subject,Stool
+SRR8417535,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,49,male,148,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417536,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,52,female,149,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417537,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,61,male,146,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417538,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,41,female,147,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417539,Healthy subject,control,intestinal mucosa,Italy,55,male,144,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417540,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,64,female,145,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417541,Healthy subject,control,intestinal mucosa,Italy,42,male,152,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417542,Healthy subject,control,stool,Italy,34,female,153,LS454,Absence,Healthy subject,Stool
+SRR8417543,Healthy subject,control,stool,Italy,72,male,249,LS454,Absence,Healthy subject,Stool
+SRR8417555,Healthy subject,control,intestinal mucosa,Italy,54,female,159,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417556,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,53,female,158,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417557,Healthy subject,control,intestinal mucosa,Italy,54,female,161,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417558,Healthy subject,control,stool,Italy,55,female,160,LS454,Absence,Healthy subject,Stool
+SRR8417559,Healthy subject,control,stool,Italy,43,male,155,LS454,Absence,Healthy subject,Stool
+SRR8417560,Healthy subject,control,intestinal mucosa,Italy,34,female,154,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417561,Irritable Bowel Syndrome,IBS,stool,Italy,53,female,157,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417562,Healthy subject,control,intestinal mucosa,Italy,42,male,156,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417563,Healthy subject,control,stool,Italy,61,female,219,LS454,Absence,Healthy subject,Stool
+SRR8417564,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,25,female,163,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417565,Irritable Bowel Syndrome,IBS,stool,Italy,25,female,162,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417566,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,40,female,110,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417567,Healthy subject,control,stool,Italy,63,male,111,LS454,Absence,Healthy subject,Stool
+SRR8417568,Healthy subject,control,intestinal mucosa,Italy,50,female,108,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417569,Irritable Bowel Syndrome,IBS,stool,Italy,41,female,109,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417570,Healthy subject,control,intestinal mucosa,Italy,53,female,216,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417572,Irritable Bowel Syndrome,IBS,stool,Italy,52,female,83,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417573,Irritable Bowel Syndrome,IBS,stool,Italy,66,male,81,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417574,Healthy subject,control,stool,Italy,49,male,217,LS454,Absence,Healthy subject,Stool
+SRR8417575,Irritable Bowel Syndrome,IBS,stool,Italy,64,female,77,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417576,Irritable Bowel Syndrome,IBS,stool,Italy,54,male,75,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417577,Irritable Bowel Syndrome,IBS,stool,Italy,49,female,79,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417578,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,64,female,78,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417579,Healthy subject,control,intestinal mucosa,Italy,56,male,222,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417580,Healthy subject,control,stool,Italy,24,female,71,LS454,Absence,Healthy subject,Stool
+SRR8417581,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,30,female,74,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417582,Irritable Bowel Syndrome,IBS,stool,Italy,30,female,73,LS454,Alternating constipation and diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417583,Healthy subject,control,stool,Italy,55,male,223,LS454,Absence,Healthy subject,Stool
+SRR8417584,Healthy subject,control,intestinal mucosa,Italy,61,female,220,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417585,Healthy subject,control,intestinal mucosa,Italy,49,male,218,LS454,Absence,Healthy subject,Not Inflamed
+SRR8417586,Healthy subject,control,stool,Italy,56,male,221,LS454,Absence,Healthy subject,Stool
+SRR8417588,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,54,female,124,LS454,constipation,Irritable Bowel Syndrome,Not Inflamed
+SRR8417589,Irritable Bowel Syndrome,IBS,stool,Italy,46,male,125,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417590,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,46,male,126,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417591,Irritable Bowel Syndrome,IBS,stool,Italy,46,female,127,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417592,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,46,female,128,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417593,Irritable Bowel Syndrome,IBS,stool,Italy,40,male,129,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417594,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,40,male,130,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417595,Irritable Bowel Syndrome,IBS,stool,Italy,54,female,131,LS454,diarrhea,Irritable Bowel Syndrome,Stool
+SRR8417596,Irritable Bowel Syndrome,IBS,intestinal mucosa,Italy,54,female,132,LS454,diarrhea,Irritable Bowel Syndrome,Not Inflamed
+SRR8417597,Irritable Bowel Syndrome,IBS,stool,Italy,62,female,133,LS454,constipation,Irritable Bowel Syndrome,Stool
+SRR8417600,Healthy subject,control,stool,Italy,51,female,69,LS454,Absence,Healthy subject,Stool
+SRR8417601,Healthy subject,control,intestinal mucosa,Italy,51,female,70,LS454,Absence,Healthy subject,Not Inflamed

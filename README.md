@@ -17,6 +17,8 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 - Example metagenomic abundance, MRI, BMI-MRI, 16S abundance, and metadata files
 - Extension application: 16S abundance workflow
 - Extension application: high-BMI SPECTRA workflow
+- 16S and WGS taxon name-conversion Skills
+- A reproducible normal-BMI WGS case study
 - Command-line scripts and shared utility functions
 
 ## Directory
@@ -40,6 +42,11 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 │   └── extensions/
 │       ├── 16S/
 │       └── high_bmi/
+├── skills/
+│   ├── spectra-16s-name-converter/
+│   └── spectra-wgs-name-converter/
+├── case_studies/
+│   └── NingL_2022_CRC/
 ├── scripts/
 │   ├── utils.py
 │   ├── predict_spectra_from_abundance.py
@@ -53,7 +60,7 @@ Yin W., Liu L., Zhu R. et al. **Gut Microbiome-derived Disease-associated Indice
 
 ## Environment
 
-Recommended Python version: `3.12`.
+Recommended Python version: `3.10`.
 
 ```bash
 conda env create -f environment.yml
@@ -80,17 +87,24 @@ Main package versions:
 
 ## Input Data
 
-All input CSV files use sample IDs in the first column.
+Provide relative abundance as a CSV matrix with samples in rows, microbial
+features in columns, and sample IDs in the first column. Values may be
+proportions (row totals approximately 1) or percentages (approximately 100).
+The models include the required preprocessing.
+MSig name-format or incomplete-coverage checks issue advisory warnings and allow
+prediction to continue.
 
-### Metagenomic abundance matrix
+MGS/WGS feature names must follow the **MetaPhlAn3** version. For **16S**, names
+must match the **MPA annotation** labels used by the supplied 16S reference.
+If source names differ, use the name-conversion Skills in [`skills/`](skills/)
+and review the mapping before prediction.
 
-Use this input for the main SPECTRA workflow:
+For guidance starting from sequencing reads, see the
+[WGS and 16S processing workflows](#preparing-relative-abundance-from-raw-reads).
 
-```text
-data/example_metagenomic_abundance.csv
-```
+### Metagenomic relative abundance matrix
 
-Rows are samples and columns are microbial taxa/features. Values should follow the clr transformed abundance format as the example file.
+Use `data/example_metagenomic_abundance.csv` for the main SPECTRA workflow.
 
 ### MRI matrix
 
@@ -110,7 +124,7 @@ ACVD, AS, BPA, CL, IBD, IGT, T2D, CI, HC, FL, ME, SC
 
 ### Extension inputs
 
-The 16S extension uses:
+The 16S extension takes relative abundance and uses:
 
 ```text
 data/example_16s_abundance.csv
@@ -122,11 +136,60 @@ The high-BMI extension uses:
 data/example_bmi_mri.csv
 ```
 
-The example metadata file contains sample IDs and phenotype labels:
+The example metadata file contains only sample IDs and phenotype labels:
 
 ```text
 data/example_metadata.csv
 ```
+
+## Preparing relative abundance from raw reads
+
+Complete sequencing-read processing before uploading a relative-abundance table.
+The models apply their own preprocessing internally.
+
+### WGS: curatedMetagenomicData v3 taxonomic profiling
+
+Please process WGS metagenomic sequencing data as follows. For initial read quality
+control, we recommend assessing read quality using FastQC and removing sequencing
+adapters, low-quality bases, and host-derived reads using
+[KneadData](https://github.com/biobakery/kneaddata), which combines Trimmomatic and
+Bowtie2. Then follow the taxonomic-profiling workflow used by curatedMetagenomicData
+v3: run MetaPhlAn v3.0 with the `mpa_v30_CHOCOPhlAn_201901` database and default
+profiling parameters. For paired-end data, supply both read files to MetaPhlAn.
+Extract species-level relative abundances for each sample/run, retain the full
+MetaPhlAn3 taxonomic lineage names and all profiled species, combine the profiles
+into a sample-by-species matrix, and normalize each sample to sum to 1. See the
+[curatedMetagenomicData pipeline documentation](https://waldronlab.io/curatedMetagenomicData/articles/our-pipeline.html)
+and [MetaPhlAn3 documentation](https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-3.0)
+for details.
+
+The initial quality-control steps above are recommendations for new raw reads.
+curatedMetagenomicData v3 relied on study-specific preprocessing, as explained in
+the [maintainer's processing and database notes](https://support.bioconductor.org/p/9154295/).
+
+### 16S: GMrepo processing
+
+Please process the 16S sequencing data according to the
+[GMrepo pipeline](https://doi.org/10.1093/nar/gkz764) (Nucleic Acids Research, 2020),
+as follows: assess read quality using FastQC v0.11.8, remove sequencing vector
+sequences and low-quality bases using Trimmomatic (alternatively, use Cutadapt for
+primer removal, e.g., for Illumina data), and discard reads shorter than two-thirds
+of their original length. Merge paired-end reads using Casper and process
+single-end reads directly. Convert FASTQ to FASTA using Seqtk if needed. Assign
+taxonomy using MAPseq v1.2, retaining reads with a genus-level combined score >0.4.
+Calculate species-level relative abundances for each sample/run and normalize the
+abundances to sum to 1.
+
+### If you used another processing workflow
+
+Check species-name compatibility before prediction, especially if you used a
+different profiling tool or taxonomy database. WGS names should follow MetaPhlAn3;
+16S names should match the MPA annotation labels used by the supplied 16S reference.
+If names differ, you can use `spectra-wgs-name-converter` for WGS or
+`spectra-16s-name-converter` for 16S, then review the mapped and unmatched names.
+Keep all source species in the relative-abundance table. Name conversion
+standardizes labels; abundance estimates can still differ between processing
+workflows.
 
 ## Main Workflow: Metagenomic Abundance -> SPECTRA Prediction
 
@@ -210,6 +273,13 @@ python scripts/predict_bmi.py \
   --input path/to/your_bmi_mri.csv \
   --output results/your_bmi_predictions.csv
 ```
+
+## Worked WGS Case Study
+
+[`case_studies/NingL_2022_CRC/`](case_studies/NingL_2022_CRC/) provides a
+complete example starting from a published MetaPhlAn3 matrix. It includes
+normal-BMI cohort selection, name conversion, relative-abundance input,
+built-in preprocessing, MRI calculation, SPECTRA probabilities, and evaluation.
 
 ## Quick Check
 

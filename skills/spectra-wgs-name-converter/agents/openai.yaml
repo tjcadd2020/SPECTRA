@@ -1,0 +1,4 @@
+interface:
+  display_name: "SPECTRA WGS name converter"
+  short_description: "Convert WGS species labels to MetaPhlAn3 names"
+  default_prompt: "Use $spectra-wgs-name-converter to convert this WGS taxon list and save a two-column mapping CSV."
